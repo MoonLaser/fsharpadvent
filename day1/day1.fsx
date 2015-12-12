@@ -12,13 +12,11 @@ let result =
   |> Array.fold (fun (floor, basementFloor, position) elem ->
   match elem with
   | Up ->
-      if floor = -1 && basementFloor = -1 then
-        (floor + 1, position, position + 1)
-      else
-        (floor + 1, basementFloor, position + 1)
+    match floor, basementFloor with
+    | -1, -1 -> (floor + 1, position, position + 1)
+    | _, _ -> (floor + 1, basementFloor, position + 1)
   | Down ->
-      if floor = -1 && basementFloor = -1 then
-        (floor - 1, position, position + 1)
-      else
-        (floor - 1, basementFloor, position + 1))
+    match floor, basementFloor with
+    | -1, -1 -> (floor - 1, position, position + 1)
+    | _, _ -> (floor - 1, basementFloor, position + 1))
     (0, -1, 0)
